@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — FREYR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --bone: #ede7d9;
+    --charcoal: #1c1c1a;
+    --warm-grey: #8a8478;
+    --rust: #b5522a;
+    --gold: #c9a84c;
+    --navy: #1e2a4a;
+    --light-border: rgba(28,28,26,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--charcoal); font-family: 'Josefin Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 40px; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(245,240,232,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-border);
+  }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; }
+  .logo span { color: var(--rust); }
+  nav { display: flex; gap: 32px; align-items: center; }
+  nav a { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; color: var(--warm-grey); transition: color 0.2s; }
+  nav a:hover, nav a.active { color: var(--charcoal); }
+
+  .page-hero {
+    padding-top: 72px;
+    background: var(--navy);
+    min-height: 340px;
+    display: flex; align-items: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 70%, rgba(181,82,42,0.08) 0%, transparent 60%);
+  }
+  .page-hero-content {
+    position: relative; z-index: 2;
+    padding: 0 80px 64px;
+    max-width: 1200px; width: 100%;
+    animation: fadeUp 1s ease forwards;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .page-eyebrow { font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 88px); font-weight: 300; color: var(--cream); line-height: 0.95; }
+
+  .content-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 80px; }
+  .rule { width: 48px; height: 1px; background: var(--gold); margin: 28px 0 40px; }
+
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+  /* LEFT — INFO */
+  .contact-info { }
+  .contact-intro { font-size: 13px; line-height: 2; color: rgba(28,28,26,0.65); margin-bottom: 48px; letter-spacing: 0.02em; }
+  .contact-method { display: flex; align-items: flex-start; gap: 20px; padding: 28px 0; border-top: 1px solid var(--light-border); }
+  .contact-method:last-child { border-bottom: 1px solid var(--light-border); }
+  .contact-method-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .contact-method-body { }
+  .contact-method-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .contact-method-value { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--charcoal); margin-bottom: 6px; }
+  .contact-method-value a { color: var(--charcoal); text-decoration: none; transition: color 0.2s; }
+  .contact-method-value a:hover { color: var(--rust); }
+  .contact-method-note { font-size: 11px; color: var(--warm-grey); letter-spacing: 0.05em; }
+
+  /* RIGHT — FORM */
+  .contact-form { }
+  .form-label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+  .form-group { margin-bottom: 24px; }
+  .form-group label { display: block; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--warm-grey); margin-bottom: 10px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; background: var(--bone); border: 1px solid var(--light-border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 13px; font-weight: 300;
+    color: var(--charcoal); padding: 14px 18px; outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--gold); background: var(--cream);
+  }
+  .form-group textarea { min-height: 140px; resize: vertical; }
+  .form-group select { cursor: pointer; }
+
+  .submit-btn {
+    width: 100%; padding: 16px;
+    background: var(--charcoal); color: var(--cream);
+    border: none; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 300;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--navy); }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 48px 0;
+  }
+  .form-success-icon { font-size: 32px; margin-bottom: 16px; }
+  .form-success-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; margin-bottom: 12px; }
+  .form-success-text { font-size: 13px; color: var(--warm-grey); line-height: 1.8; }
+
+  footer { background: var(--charcoal); color: var(--cream); padding: 60px 80px 40px; margin-top: 80px; }
+  .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding-bottom: 48px; border-bottom: 1px solid rgba(245,240,232,0.1); margin-bottom: 32px; }
+  .footer-brand .logo { color: var(--cream); display: block; margin-bottom: 16px; }
+  .footer-brand .logo span { color: var(--gold); }
+  .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: rgba(245,240,232,0.5); line-height: 1.6; }
+  .footer-col h4 { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 12px; color: rgba(245,240,232,0.5); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.15em; color: rgba(245,240,232,0.3); }
+
+  @media (max-width: 768px) {
+    header { padding: 0 20px; }
+    .page-hero-content { padding: 0 24px 48px; }
+    .content-wrap { padding: 60px 24px; }
+    .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+    footer { padding: 48px 24px 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FR<span>Ξ</span>YR</a>
+  <nav>
+    <a href="index.html#product">Shop</a>
+    <a href="#">Lookbook</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="page-eyebrow">Get In Touch</p>
+    <h1 class="page-title">Contact</h1>
+  </div>
+</section>
+
+<div class="content-wrap">
+  <div class="rule"></div>
+
+  <div class="contact-layout">
+
+    <!-- LEFT -->
+    <div class="contact-info">
+      <p class="contact-intro">We're a small team — real people who read every message. Whether you have a question about your order, sizing, or just want to say something, we're here.</p>
+
+      <div class="contact-method">
+        <div class="contact-method-icon">✉</div>
+        <div class="contact-method-body">
+          <div class="contact-method-label">Email</div>
+          <div class="contact-method-value"><a href="mailto:nyoungpow@gmail.com">nyoungpow@gmail.com</a></div>
+          <div class="contact-method-note">We aim to respond within 48 hours, Monday – Friday</div>
+        </div>
+      </div>
+
+      <div class="contact-method">
+        <div class="contact-method-icon">📦</div>
+        <div class="contact-method-body">
+          <div class="contact-method-label">Order Inquiries</div>
+          <div class="contact-method-value" style="font-size:16px;">Include your order number in the subject line for faster support.</div>
+          <div class="contact-method-note">Orders ship within 1 – 3 business days</div>
+        </div>
+      </div>
+
+      <div class="contact-method">
+        <div class="contact-method-icon">📍</div>
+        <div class="contact-method-body">
+          <div class="contact-method-label">Based In</div>
+          <div class="contact-method-value" style="font-size:18px;">Canada</div>
+          <div class="contact-method-note">Shipping Canada & United States</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — FORM (mailto fallback) -->
+    <div class="contact-form">
+      <p class="form-label">Send a Message</p>
+
+      <div id="contactFormWrap">
+        <div class="form-group">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label for="femail">Email Address</label>
+          <input type="email" id="femail" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="fsubject">Subject</label>
+          <select id="fsubject">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="Order Inquiry">Order Inquiry</option>
+            <option value="Sizing Help">Sizing Help</option>
+            <option value="Shipping Question">Shipping Question</option>
+            <option value="Wholesale / Collaboration">Wholesale / Collaboration</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fmessage">Message</label>
+          <textarea id="fmessage" placeholder="Write your message here..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="sendForm()">Send Message</button>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✦</div>
+        <div class="form-success-title">Message Sent</div>
+        <p class="form-success-text">Your message has been sent to our inbox.<br>We'll be in touch within 48 hours.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">FR<span>Ξ</span>YR</a>
+      <p class="footer-tagline">"Rooted in myth,<br>crafted for the present."</p>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="about.html">Our Story</a>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <a href="sizing-guide.html">Sizing Guide</a>
+      <a href="shipping.html">Shipping</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Freyr Clothing. All rights reserved.</span>
+    <span>Secured by Stripe · SSL Encrypted</span>
+  </div>
+</footer>
+
+<script>
+function sendForm() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const subject = document.getElementById('fsubject').value;
+  const message = document.getElementById('fmessage').value.trim();
+
+  if (!name || !email || !subject || !message) {
+    alert('Please fill in all fields before sending.');
+    return;
+  }
+
+  const mailtoSubject = encodeURIComponent('[Freyr] ' + subject + ' — ' + name);
+  const mailtoBody = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
+  window.location.href = 'mailto:nyoungpow@gmail.com?subject=' + mailtoSubject + '&body=' + mailtoBody;
+
+  // Show success state
+  document.getElementById('contactFormWrap').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
